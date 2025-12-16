@@ -6,7 +6,7 @@ import type { Coffee, Pairing } from "@/app/page";
 import Image from "next/image";
 import { ModeToggle } from "./mode-toggle";
 import { AlternativeCard } from "./alternative-card";
-import { ArrowLeft, ShoppingBag, Sparkles } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface PairingRevealProps {
@@ -49,15 +49,22 @@ export function PairingReveal({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="max-w-lg mx-auto"
+          className="max-w-xl mx-auto"
         >
           {/* Images */}
-          <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="relative flex items-center justify-center mb-8 aspect-video rounded-2xl overflow-hidden">
             <motion.div
-              initial={{ x: -40, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
+              initial={{
+                // x: -40,
+                opacity: 0,
+              }}
+              animate={{
+                //  x: 0,
+
+                opacity: 1,
+              }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-xl"
+              className="relative w-full h-full  overflow-hidden shadow-xl"
             >
               <Image
                 src={coffee.image_placeholder || "/placeholder.svg"}
@@ -65,23 +72,19 @@ export function PairingReveal({
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </motion.div>
 
             <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.5, duration: 0.4, type: "spring" }}
-              className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-lg"
-            >
-              <Sparkles className="w-5 h-5" />
-            </motion.div>
-
-            <motion.div
-              initial={{ x: 40, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-xl"
+              initial={{
+                // x: 40,
+                opacity: 0,
+              }}
+              animate={{
+                // x: 0,
+                opacity: 1,
+              }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="relative w-full h-full overflow-hidden object-fill"
             >
               <Image
                 src={
@@ -91,67 +94,99 @@ export function PairingReveal({
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </motion.div>
-          </div>
+            <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/80 h-1/3 to-transparent" />
 
-          {/* Pairing Details */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-center mb-8"
-          >
-            <p className="text-xs uppercase tracking-[0.2em] text-primary font-medium mb-3">
-              Perfect Pairing
-            </p>
-            <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-2">
-              {coffee.name}
-            </h2>
-            <p className="text-muted-foreground text-lg mb-1">pairs with</p>
-            <h3 className="font-serif text-2xl md:text-3xl text-secondary-foreground">
-              {pairing.believer_match.pastry_name}
-            </h3>
-          </motion.div>
-
-          {/* The Why */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="bg-card border border-border/50 rounded-2xl p-5 md:p-6 mb-6"
-          >
-            <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
-              The Science
-            </p>
-            <p className="text-foreground leading-relaxed text-base md:text-lg">
-              "{pairing.believer_match.reason}"
-            </p>
-          </motion.div>
-
-          {/* Price & CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.5 }}
-            className="flex items-center justify-between bg-primary/5 rounded-2xl p-5"
-          >
-            <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wider">
-                Bundle Price
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.5, duration: 0.4, type: "spring" }}
+              className="absolute z-10 top-2 right-2 size-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground shadow-lg"
+            >
+              <Sparkles className="size-4 animate-pulse" />
+            </motion.div>
+            {/* Bottom label overlay */}
+            <div className="absolute bottom-0 left-0 right-0 z-10 p-5">
+              <p className="text-white/80 text-xs uppercase tracking-[0.2em] font-medium mb-1">
+                Perfect Pairing
               </p>
-              <p className="font-serif text-2xl text-foreground">
-                {pairing.believer_match.price_bundle}
+              <p className="text-white font-serif text-xl md:text-3xl">
+                {coffee.name} + {pairing.believer_match.pastry_name}
               </p>
             </div>
-            <Button
-              size="lg"
-              className="gap-2 rounded-full px-6 cursor-pointer"
+          </div>
+
+          <div className="max-w-lg mx-auto">
+            {/* Pairing Details */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              className="text-center mb-8"
             >
-              <ShoppingBag className="w-4 h-4" />
-              Order Pair
-            </Button>
-          </motion.div>
+              <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-2">
+                {coffee.name}
+              </h2>
+              <p className="text-muted-foreground text-lg mb-1">
+                pairs beautifully with
+              </p>
+              <h3 className="font-serif text-2xl md:text-3xl text-secondary-foreground">
+                {pairing.believer_match.pastry_name}
+              </h3>
+            </motion.div>
+
+            {/* The Why */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="bg-card border border-border/50 rounded-2xl p-5 md:p-6 mb-6"
+            >
+              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                The Science
+              </p>
+              <p className="text-foreground leading-relaxed text-base md:text-lg">
+                "{pairing.believer_match.reason}"
+              </p>
+            </motion.div>
+
+            {/* Price & CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.5 }}
+              className="flex flex-col gap-4 bg-primary/5 rounded-2xl p-5"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">
+                    Bundle Price
+                  </p>
+                  <p className="font-serif text-2xl text-foreground">
+                    {pairing.believer_match.price_bundle}
+                  </p>
+                </div>
+                <Button
+                  size="lg"
+                  className="gap-2 rounded-full px-6 cursor-pointer"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  Order Pair
+                </Button>
+              </div>
+
+              <div className="h-px w-full bg-border/50" />
+
+              {/* Exit Strategy, If user just want to go with slection not paired one */}
+              <Button
+                variant="link"
+                className="cursor-pointer mx-auto text-center"
+                onClick={onReset}
+              >
+                No thanks, just the {coffee.name}
+              </Button>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* Explorer Alternatives */}
