@@ -15,6 +15,7 @@ export interface Coffee {
   name: string;
   roast: string;
   image_placeholder: string;
+  price: string;
 }
 
 export interface PairingMatch {
@@ -41,18 +42,21 @@ const coffees: Coffee[] = [
     name: "Flat White",
     roast: "Sweet Standard",
     image_placeholder: "/flat-white-coffee-in-ceramic-cup-overhead-view.jpg",
+    price: "4.50 €",
   },
   {
     id: "c2",
     name: "Hand Filter",
     roast: "Ethiopia Honey",
     image_placeholder: "/pour-over-hand-filter-coffee-brewing.jpg",
+    price: "5.00 €",
   },
   {
     id: "c3",
     name: "Espresso",
     roast: "Dark Roast",
     image_placeholder: "/espresso-shot-in-white-cup-crema.jpg",
+    price: "6.00 €",
   },
 ];
 

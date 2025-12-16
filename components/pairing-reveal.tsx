@@ -21,6 +21,7 @@ export function PairingReveal({
   onReset,
 }: PairingRevealProps) {
   const [mode, setMode] = useState<"believer" | "explorer">("believer");
+  const [hoverExitBtn, setHoverExitBtn] = useState(false);
 
   return (
     <div className="min-h-[100dvh] flex flex-col">
@@ -155,7 +156,7 @@ export function PairingReveal({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.5 }}
-              className="flex flex-col gap-4 bg-primary/5 rounded-2xl p-5"
+              className="relative overflow-hidden flex flex-col gap-4 bg-primary/5 rounded-2xl p-5  "
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -176,12 +177,32 @@ export function PairingReveal({
               </div>
 
               <div className="h-px w-full bg-border/50" />
-
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: hoverExitBtn ? 1 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute inset-0 z-10 bg-linear-to-b from-background/95 from-50% to-90% to-background/5"
+              >
+                <motion.p
+                  initial="hidden"
+                  animate={hoverExitBtn ? "visible" : "hidden"}
+                  transition={{ delay: 0.2, duration: 0.4, type: "spring" }}
+                  variants={{
+                    hidden: { y: "-160%" },
+                    visible: { y: "0%" },
+                  }}
+                  className="relative font-serif text-xl md:text-3xl text-primary z-20 font-extrabold text-center my-6"
+                >
+                  {coffee.name} : {coffee.price}
+                </motion.p>
+              </motion.div>
               {/* Exit Strategy, If user just want to go with slection not paired one */}
               <Button
                 variant="link"
-                className="cursor-pointer mx-auto text-center"
+                className="cursor-pointer mx-auto text-center  z-20 relative"
                 onClick={onReset}
+                onMouseEnter={() => setHoverExitBtn(true)}
+                onMouseLeave={() => setHoverExitBtn(false)}
               >
                 No thanks, just the {coffee.name}
               </Button>
