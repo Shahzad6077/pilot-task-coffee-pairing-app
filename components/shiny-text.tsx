@@ -16,7 +16,7 @@ const ShinyText: React.FC<ShinyTextProps> = ({
   const animationDuration = `${speed}s`;
 
   return (
-    <div
+    <span
       className={`text-primary/60 bg-clip-text inline-block ${
         disabled ? "" : "animate-shine"
       } ${className}`}
@@ -29,7 +29,7 @@ const ShinyText: React.FC<ShinyTextProps> = ({
       }}
     >
       {text}
-    </div>
+    </span>
   );
 };
 
