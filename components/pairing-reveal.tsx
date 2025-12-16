@@ -144,7 +144,10 @@ export function PairingReveal({
                 {pairing.believer_match.price_bundle}
               </p>
             </div>
-            <Button size="lg" className="gap-2 rounded-full px-6">
+            <Button
+              size="lg"
+              className="gap-2 rounded-full px-6 cursor-pointer"
+            >
               <ShoppingBag className="w-4 h-4" />
               Order Pair
             </Button>

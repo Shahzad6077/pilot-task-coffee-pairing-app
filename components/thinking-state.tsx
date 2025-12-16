@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import type { Coffee } from "@/app/page";
 import Image from "next/image";
+import ShinyText from "./shiny-text";
 
 interface ThinkingStateProps {
   coffee: Coffee;
@@ -90,7 +91,13 @@ export function ThinkingState({ coffee, onComplete }: ThinkingStateProps) {
             transition={{ duration: 0.25 }}
             className="text-sm md:text-base text-muted-foreground text-center"
           >
-            {thinkingSteps[currentStep]}
+            <ShinyText
+              text={thinkingSteps[currentStep]}
+              disabled={false}
+              speed={3}
+              className="custom-class"
+            />
+            {/* {thinkingSteps[currentStep]} */}
           </motion.p>
         </AnimatePresence>
       </div>

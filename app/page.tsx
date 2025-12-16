@@ -5,6 +5,8 @@ import { CoffeeSelection } from "@/components/coffee-selection";
 import { ThinkingState } from "@/components/thinking-state";
 import { PairingReveal } from "@/components/pairing-reveal";
 import { AnimatePresence, motion } from "motion/react";
+import { Footer } from "@/components/footer";
+import ShinyText from "@/components/shiny-text";
 
 export type AppState = "selection" | "thinking" | "reveal";
 
@@ -187,6 +189,7 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
+      <Footer />
     </main>
   );
 }
