@@ -3,9 +3,10 @@
 import { motion } from "motion/react";
 import type { Coffee } from "@/app/page";
 import Image from "next/image";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 import BorderedLayout from "./bordered-layout";
+import UnderlineToBackground from "./underline-to-background";
 
 interface CoffeeSelectionProps {
   coffees: Coffee[];
@@ -22,13 +23,30 @@ export function CoffeeSelection({ coffees, onSelect }: CoffeeSelectionProps) {
         transition={{ duration: 0.6 }}
         className="mb-8 md:mb-12"
       >
-        <div className="flex items-center gap-2 mb-2">
-          <div className="flex items-center justify-center outline outline-primary/50 outline-offset-1 rounded-full">
-            <div className="size-2 rounded-full bg-primary animate-pulse" />
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center outline outline-primary/50 outline-offset-1 rounded-full">
+              <div className="size-2 rounded-full bg-primary animate-pulse" />
+            </div>
+            <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium">
+              Sweetspot Coffee
+            </span>
           </div>
-          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium">
-            Sweetspot Coffee
-          </span>
+          <UnderlineToBackground
+            targetTextColor="#fff"
+            className="cursor-pointer"
+            as="div"
+          >
+            <a
+              href="https://github.com/Shahzad6077/pilot-task-coffee-pairing-app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center  gap-1.5 text-xs  transition-colors"
+            >
+              <span className="uppercase tracking-[0.1em]">GitHub</span>
+              <Github className="w-3.5 h-3.5" />
+            </a>
+          </UnderlineToBackground>
         </div>
         <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl tracking-tight text-foreground">
           PAIR'D
